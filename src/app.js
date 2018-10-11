@@ -49,8 +49,6 @@ net.createServer(function(socket) {
         console.log(`Number of Clients -> ${clients.length}`)
     })
 }).listen(port,function(){
-    console.log('listening')
+    console.log('listening on '+port)
 })
 
-
-console.log("here"+mtz().format("YYYY-DD-MM"))

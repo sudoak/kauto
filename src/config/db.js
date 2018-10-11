@@ -13,7 +13,6 @@ const options = {
 }
 mongoose.Promise = global.Promise;
 try{
-    console.log(process.env.DB)
     mongoose.connect(`mongodb://localhost:27017/${process.env.DB}`,options).then(
         () => { console.log("DB Connected") },
         err => { console.log(err) }
