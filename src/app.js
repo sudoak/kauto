@@ -1,6 +1,5 @@
-require('dotenv').config()
-require('./config/db.js')
 
+require('dotenv').config()
 let mtz = require('moment-timezone')
     async = require('async')
     net = require('net')
@@ -9,7 +8,8 @@ let mtz = require('moment-timezone')
 
 //Set default TimeZone
 mtz.tz.setDefault("Asia/Kolkata");
-
+//DB 
+require('./config/db.js')
 //Modals
 let R = require('./modal/records.schema')
 let E = require('./modal/error.schema')
