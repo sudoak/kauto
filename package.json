@@ -1,0 +1,29 @@
+{
+  "name": "tcpserver",
+  "version": "0.0.0",
+  "description": "Tcp server to recieve and store data (RS232)",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "TCP"
+  ],
+  "author": "sudoak",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "figlet": "^1.2.1",
+    "ip": "^1.1.5",
+    "moment": "^2.22.2",
+    "moment-timezone": "^0.5.21",
+    "mongoose": "^5.3.2",
+    "mongoose-double": "0.0.1",
+    "morgan": "^1.9.1",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.3.3"
+  }
+}
