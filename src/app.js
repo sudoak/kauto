@@ -4,6 +4,7 @@ let mtz = require('moment-timezone')
     async = require('async')
     net = require('net')
     port  = process.env.PORT || 4400
+    port2  = process.env.PORT2 || 5500
     clients = [];
 
 //Set default TimeZone
@@ -13,7 +14,7 @@ require('./config/db.js')
 //Modals
 let R = require('./modal/records.schema')
 let E = require('./modal/error.schema')
-
+let D = require('./modal/data.schema')
 //TCP Server
 net.createServer(function(socket) {
     socket.name = socket.remoteAddress + ":" + socket.remotePort
@@ -52,3 +53,28 @@ net.createServer(function(socket) {
     console.log('listening on '+port)
 })
 
+//TCP Server 2 
+
+net.createServer(function(socket) {
+    socket.name = socket.remoteAddress + ":" + socket.remotePort
+    console.log(`Connection Details -> ${socket.name}`)
+    clients.push(socket)
+    
+    socket.on('data', async (data) => {
+
+        let d = data.toString()
+            ts = mtz().format()
+            let o = new D({
+                data: d,
+                date: ts.substr(0,10),
+                timestamp: ts
+            })
+            await o.save()
+    })
+    socket.on('end', ()=> {
+        clients.splice(clients.indexOf(socket), 1)
+        console.log(`Number of Clients -> ${clients.length}`)
+    })
+}).listen(port2,function(){
+    console.log('listening on '+port2)
+})
