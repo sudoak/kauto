@@ -1,6 +1,7 @@
 
 require('dotenv').config()
 let mtz = require('moment-timezone')
+    m = require('moment')
     async = require('async')
     net = require('net')
     port  = process.env.PORT || 4400
@@ -33,6 +34,7 @@ net.createServer(function(socket) {
                 speed : parseFloat(d[3]),
                 flowRate : parseFloat(d[4]),
                 date: ts.substr(0,10),
+                seconds: m(ts).valueOf(),
                 timestamp: ts
             })
             await o.save()

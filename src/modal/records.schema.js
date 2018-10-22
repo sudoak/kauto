@@ -32,6 +32,10 @@ var Records = mongoose.model('records', {
         type: String,
         require: true
     },
+    seconds: {
+        type: Number,
+        require: true
+    },
     timestamp:{
         type: String,
         required: true,
