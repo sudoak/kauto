@@ -34,7 +34,7 @@ net.createServer(function(socket) {
                 speed : parseFloat(d[3]),
                 flowRate : parseFloat(d[4]),
                 date: ts.substr(0,10),
-                seconds: m(ts).valueOf(),
+                seconds: m(mtz().add(330,'m')).valueOf(),
                 timestamp: ts
             })
             await o.save()
