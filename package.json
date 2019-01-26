@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Tcp server to recieve and store data (RS232)",
   "main": "./src/app.js",
+  "bin": "./src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +17,7 @@
     "bluebird": "^3.5.2",
     "body-parser": "^1.18.3",
     "dotenv": "^6.1.0",
+    "express": "^4.16.4",
     "figlet": "^1.2.1",
     "ip": "^1.1.5",
     "moment": "^2.22.2",
@@ -26,5 +28,10 @@
     "rollbar": "^2.4.7",
     "winston": "^3.1.0",
     "winston-daily-rotate-file": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.15.0"
   }
 }

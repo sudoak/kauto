@@ -13,7 +13,7 @@ const options = {
 }
 mongoose.Promise = global.Promise;
 try{
-    mongoose.connect(`mongodb://localhost:27017/${process.env.DB}`,options).then(
+    mongoose.connect(`mongodb://localhost:27017/kauto`,options).then(
         () => { console.log("DB Connected") },
         err => { console.log(err) }
       );
