@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mymongo:
+    container_name: mymongo
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongoData:/data/db
+  app:
+    container_name: express
+    restart: always
+    build: .
+    ports:
+      - "4400:4400"
+      - "3000:3000"
+    depends_on:
+      - mymongo
+volumes:
+  mongoData:

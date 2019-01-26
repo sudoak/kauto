@@ -3,11 +3,11 @@ require("dotenv").config();
 const express = require("express");
 let bodyParser = require("body-parser");
 let mtz = require("moment-timezone");
+let m = require("moment");
+let async = require("async");
+let net = require("net");
+let port = 4400;
 
-m = require("moment");
-async = require("async");
-net = require("net");
-port = process.env.PORT || 4400;
 // port2 = process.env.PORT2 || 5500;
 
 clients = [];
@@ -99,7 +99,7 @@ net
 // Express js Server
 
 const app = express();
-const port = 3000;
+const exPort = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -111,4 +111,50 @@ app.get("/", (req, res) => res.send("Hello World!"));
 app.get("/sample", (req, res) => {
   res.status(200).json({ data: { a: "A" } });
 });
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+app.get("/data", async (req, res) => {
+  try {
+    const d = await R.find();
+    res.status(200).json({ data: d, length: d.length });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+app.get("/devices", async (req, res) => {
+  try {
+    const devicesList = await R.distinct("deviceId");
+    console.log(devicesList);
+    res.status(200).json({ data: devicesList, length: devicesList.length });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ error: e });
+  }
+});
+
+app.post("/data-date", async (req, res) => {
+  try {
+    const dataByDate = await R.find({
+      deviceId: req.body.id,
+      date: req.body.date
+    });
+    res.status(200).json({ data: dataByDate, length: dataByDate.length });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+app.post("/data-report", async (req, res) => {
+  try {
+    console.log(req.body);
+    const dataReport = await R.find({
+      deviceId: req.body.id,
+      date: { $gte: req.body.sDate, $lte: req.body.eDate }
+    });
+    res.status(200).json({ data: dataReport, length: dataReport.length });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+app.listen(exPort, () => console.log(`Example app listening on port ${port}!`));
